@@ -178,8 +178,13 @@
     <Compile Include="Controllers\RolesController.cs" />
     <Compile Include="Controllers\SubcontractorsController.cs" />
     <Compile Include="Controllers\WorkNotesController.cs" />
+    <Compile Include="Controllers\WorkTitlesController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201601282252215_Initial.cs" />
+    <Compile Include="Migrations\201601282252215_Initial.Designer.cs">
+      <DependentUpon>201601282252215_Initial.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -193,6 +198,7 @@
     <Compile Include="Models\Resident.cs" />
     <Compile Include="Models\Subcontractor.cs" />
     <Compile Include="Models\WorkNote.cs" />
+    <Compile Include="Models\WorkTitle.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="ViewModels\CreateEmployeeViewModel.cs" />
@@ -351,7 +357,6 @@
     <Content Include="Views\InternalEmployees\Details.cshtml" />
     <Content Include="Views\InternalEmployees\Edit.cshtml" />
     <Content Include="Views\InternalEmployees\Index.cshtml" />
-    <Content Include="Views\ExternalEmployees\Create.cshtml" />
     <Content Include="Views\ExternalEmployees\Delete.cshtml" />
     <Content Include="Views\ExternalEmployees\Details.cshtml" />
     <Content Include="Views\ExternalEmployees\Edit.cshtml" />
@@ -360,6 +365,11 @@
     <Content Include="Views\Roles\Create.cshtml" />
     <Content Include="Views\Roles\Edit.cshtml" />
     <Content Include="Views\Roles\ManageUserRoles.cshtml" />
+    <Content Include="Views\WorkTitles\Create.cshtml" />
+    <Content Include="Views\WorkTitles\Delete.cshtml" />
+    <Content Include="Views\WorkTitles\Details.cshtml" />
+    <Content Include="Views\WorkTitles\Edit.cshtml" />
+    <Content Include="Views\WorkTitles\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -372,6 +382,11 @@
     <Content Include="packages.config" />
     <None Include="Project_Readme.html" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201601282252215_Initial.resx">
+      <DependentUpon>201601282252215_Initial.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

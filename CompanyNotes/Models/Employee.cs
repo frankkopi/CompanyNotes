@@ -47,10 +47,9 @@ namespace CompanyNotes.Models
         [StringLength(50)]
         public string Address { get; set; }
 
-        [Required]
-        [Display(Name = "Employees Work Title")]
-        public string Type { get; set; }
+        public int? WorkTitleId { get; set; } // FK
 
+        public virtual WorkTitle WorkTitle { get; set; }
         public virtual ICollection<Case> Cases { get; set; } // many-to-many
         public virtual ICollection<WorkNote> WorkNotes { get; set; } // one-to-many
     }

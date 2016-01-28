@@ -39,30 +39,6 @@ namespace CompanyNotes.Controllers
             return View(externalEmployee);
         }
 
-        // GET: ExternalEmployees/Create
-        public ActionResult Create()
-        {
-            ViewBag.SubcontractorId = new SelectList(db.Subcontractors, "SubcontractorId", "Name");
-            return View();
-        }
-
-        // POST: ExternalEmployees/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "EmployeeId,FirstMidName,LastName,Phone,Email,Address,Type,Role,SubcontractorId")] ExternalEmployee externalEmployee)
-        {
-            if (ModelState.IsValid)
-            {
-                db.Employees.Add(externalEmployee);
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-
-            ViewBag.SubcontractorId = new SelectList(db.Subcontractors, "SubcontractorId", "Name", externalEmployee.SubcontractorId);
-            return View(externalEmployee);
-        }
 
         // GET: ExternalEmployees/Edit/5
         public ActionResult Edit(int? id)
@@ -79,6 +55,7 @@ namespace CompanyNotes.Controllers
             }
             //ViewBag.SubcontractorId = new SelectList(db.Subcontractors, "SubcontractorId", "Name", externalEmployee.SubcontractorId);
             ViewBag.SubcontractorId = new SelectList(db.Subcontractors, "SubcontractorId", "Name", externalEmployee.SubcontractorId);
+            ViewBag.WorkTitleId = new SelectList(db.WorkTitles, "WorkTitleId", "Name", externalEmployee.WorkTitleId);
 
             return View(externalEmployee);
         }
@@ -88,7 +65,7 @@ namespace CompanyNotes.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "EmployeeId,FirstMidName,LastName,Phone,Email,Address,Type,Role,SubcontractorId")] ExternalEmployee externalEmployee)
+        public ActionResult Edit([Bind(Include = "EmployeeId,FirstMidName,LastName,Phone,Email,Address,WorkTitleId,SubcontractorId")] ExternalEmployee externalEmployee)
         {
             if (ModelState.IsValid)
             {

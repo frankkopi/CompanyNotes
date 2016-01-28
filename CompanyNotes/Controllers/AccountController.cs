@@ -177,7 +177,7 @@ namespace CompanyNotes.Controllers
                             Phone = model.CreateEmployeeViewModel.Phone,
                             Email = model.Email,
                             Address = model.CreateEmployeeViewModel.Address,
-                            Type = "No type",
+                            WorkTitleId = null,
                             HireDate = null
                         };
                         db.Employees.Add(internalEmployee);
@@ -192,7 +192,7 @@ namespace CompanyNotes.Controllers
                             Phone = model.CreateEmployeeViewModel.Phone,
                             Email = model.Email,
                             Address = model.CreateEmployeeViewModel.Address,
-                            Type = "No type",
+                            WorkTitleId = null,
                             SubcontractorId = null
                         };
                         db.Employees.Add(externalEmployee);

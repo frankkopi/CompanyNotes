@@ -21,7 +21,7 @@
             @Html.DisplayNameFor(model => model.Email)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Type)
+            @Html.DisplayNameFor(model => model.WorkTitle)
         </th>
         <th>
             @Html.Label("Roles")
@@ -44,10 +44,10 @@
             @Html.DisplayFor(modelItem => item.Email)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Type)
+            @Html.DisplayFor(modelItem => item.WorkTitle.Name)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Type)
+            @Html.DisplayFor(modelItem => item.WorkTitle.Name)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.Subcontractor.Name)

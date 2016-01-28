@@ -22,10 +22,11 @@ namespace CompanyNotes.Models
     {
         public DbSet<Case> Cases { get; set; }
         public DbSet<Client> Clients { get; set; }
-        public DbSet<Employee> Employees { get; set; } // abstract class with two children
+        public DbSet<Employee> Employees { get; set; } // abstract class with two children (InternalEmployee, ExternalEmployee)
         public DbSet<Resident> Residents { get; set; }
         public DbSet<Subcontractor> Subcontractors { get; set; }
         public DbSet<WorkNote> WorkNotes { get; set; }
+        public DbSet<WorkTitle> WorkTitles { get; set; }
 
         public ApplicationDbContext()
             : base("DefaultConnection", throwIfV1Schema: false)

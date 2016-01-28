@@ -10,7 +10,6 @@ namespace CompanyNotes.Migrations
         public Configuration()
         {
             AutomaticMigrationsEnabled = true;
-            ContextKey = "CompanyNotes.Models.ApplicationDbContext";
         }
 
         protected override void Seed(CompanyNotes.Models.ApplicationDbContext context)
