@@ -8,10 +8,10 @@ namespace CompanyNotes.Models
 {
     public enum EmployeeType {
         [Display(Name = "Internal Employee")]
-        Internal = 1,
+        InternalEmployee = 1,
 
         [Display(Name = "External Employee")]
-        External = 2
+        ExternalEmployee = 2
     }
 
     public abstract class Employee
@@ -48,6 +48,7 @@ namespace CompanyNotes.Models
         public string Address { get; set; }
 
         [Required]
+        [Display(Name = "Employees Work Title")]
         public string Type { get; set; }
 
         public virtual ICollection<Case> Cases { get; set; } // many-to-many

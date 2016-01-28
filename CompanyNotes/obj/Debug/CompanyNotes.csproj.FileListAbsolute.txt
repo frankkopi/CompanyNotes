@@ -16,3 +16,4 @@ C:\Users\Lenovo\Documents\Visual Studio 2015\Projects\Hobby Projects\CompanyNote
 C:\Users\Lenovo\Documents\Visual Studio 2015\Projects\Hobby Projects\CompanyNotes\CompanyNotes\obj\Debug\CompanyNotes.dll
 C:\Users\Lenovo\Documents\Visual Studio 2015\Projects\Hobby Projects\CompanyNotes\CompanyNotes\obj\Debug\CompanyNotes.pdb
 C:\Users\Lenovo\Documents\Visual Studio 2015\Projects\Hobby Projects\CompanyNotes\CompanyNotes\obj\Debug\CompanyNotes.csprojResolveAssemblyReference.cache
+C:\Users\Lenovo\Documents\Visual Studio 2015\Projects\Hobby Projects\CompanyNotes\CompanyNotes\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml

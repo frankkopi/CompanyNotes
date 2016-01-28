@@ -6,41 +6,54 @@
 <br />
 <br />
 
+
 @using (Html.BeginForm("Register", "Account", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
 {
     @Html.AntiForgeryToken()
     <h4>Create a new account here.</h4>
     <hr />
     @Html.ValidationSummary("", new { @class = "text-danger" })
-    
-     <div class="form-group">
-         @Html.LabelFor(m => m.CreateInternalEmployeeViewModel.FirstMidName, new { @class = "col-md-2 control-label" })
-         <div class="col-md-10">
-             @Html.TextBoxFor(m => m.CreateInternalEmployeeViewModel.FirstMidName, new { @class = "form-control" })
-         </div>
-     </div>
+
     <div class="form-group">
-        @Html.LabelFor(m => m.CreateInternalEmployeeViewModel.LastName, new { @class = "col-md-2 control-label" })
+        @Html.LabelFor(m => m.CreateEmployeeViewModel.FirstMidName, new { @class = "col-md-2 control-label" })
         <div class="col-md-10">
-            @Html.TextBoxFor(m => m.CreateInternalEmployeeViewModel.LastName, new { @class = "form-control" })
+            @Html.TextBoxFor(m => m.CreateEmployeeViewModel.FirstMidName, new { @class = "form-control" })
         </div>
     </div>
     <div class="form-group">
-        @Html.LabelFor(m => m.CreateInternalEmployeeViewModel.Address, new { @class = "col-md-2 control-label" })
+        @Html.LabelFor(m => m.CreateEmployeeViewModel.LastName, new { @class = "col-md-2 control-label" })
         <div class="col-md-10">
-            @Html.TextBoxFor(m => m.CreateInternalEmployeeViewModel.Address, new { @class = "form-control" })
+            @Html.TextBoxFor(m => m.CreateEmployeeViewModel.LastName, new { @class = "form-control" })
         </div>
     </div>
     <div class="form-group">
-        @Html.LabelFor(m => m.CreateInternalEmployeeViewModel.Phone, new { @class = "col-md-2 control-label" })
+        @Html.LabelFor(m => m.CreateEmployeeViewModel.Address, new { @class = "col-md-2 control-label" })
         <div class="col-md-10">
-            @Html.TextBoxFor(m => m.CreateInternalEmployeeViewModel.Phone, new { @class = "form-control" })
+            @Html.TextBoxFor(m => m.CreateEmployeeViewModel.Address, new { @class = "form-control" })
         </div>
     </div>
-     <div class="form-group">
+    <div class="form-group">
+        @Html.LabelFor(m => m.CreateEmployeeViewModel.Phone, new { @class = "col-md-2 control-label" })
+        <div class="col-md-10">
+            @Html.TextBoxFor(m => m.CreateEmployeeViewModel.Phone, new { @class = "form-control" })
+        </div>
+    </div>
+    <div class="form-group">
         @Html.LabelFor(m => m.Email, new { @class = "col-md-2 control-label" })
         <div class="col-md-10">
             @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-md-10 col-md-offset-2" style="color:red;">
+            @if (ViewBag.EmployeeTypeErrorMessage != null)
+            {
+                <h4>@ViewBag.EmployeeTypeErrorMessage</h4>
+            }
+        </div>
+        @Html.LabelFor(m => m.CreateEmployeeViewModel.EmployeeType, new { @class = "col-md-2 control-label" })
+        <div class="col-md-10">
+            @Html.EnumDropDownListFor(m => m.CreateEmployeeViewModel.EmployeeType, "Please select a type", new { @class = "form-control" })
         </div>
     </div>
     <div class="form-group">

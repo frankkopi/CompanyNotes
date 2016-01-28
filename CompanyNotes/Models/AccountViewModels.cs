@@ -82,7 +82,7 @@ namespace CompanyNotes.Models
         public string ConfirmPassword { get; set; }
 
         // CreateInternalEmployeeViewModel used inside RegisterViewModel
-        public CreateInternalEmployeeViewModel CreateInternalEmployeeViewModel { get; set; }
+        public CreateEmployeeViewModel CreateEmployeeViewModel { get; set; }
 
     }
 

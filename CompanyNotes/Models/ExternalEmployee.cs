@@ -7,7 +7,7 @@ namespace CompanyNotes.Models
 {
     public class ExternalEmployee : Employee
     {
-        public int SubcontractorId { get; set; } // FK
+        public int? SubcontractorId { get; set; } // FK
 
         public virtual Subcontractor Subcontractor { get; set; }
     }

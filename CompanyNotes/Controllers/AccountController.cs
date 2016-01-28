@@ -151,7 +151,7 @@ namespace CompanyNotes.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Register(RegisterViewModel model)
         {
-            if (ModelState.IsValid)
+            if (ModelState.IsValid && model.CreateEmployeeViewModel.EmployeeType != 0)
             {
                 var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
                 var result = await UserManager.CreateAsync(user, model.Password);
@@ -166,18 +166,38 @@ namespace CompanyNotes.Controllers
                     // await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
 
                     ApplicationDbContext db = new ApplicationDbContext();
-                    Employee internalEmployee = new InternalEmployee
+
+                    if (model.CreateEmployeeViewModel.EmployeeType.Equals(EmployeeType.InternalEmployee))
                     {
-                        EmployeeId = 0,
-                        FirstMidName = model.CreateInternalEmployeeViewModel.FirstMidName,
-                        LastName = model.CreateInternalEmployeeViewModel.LastName,
-                        Phone = model.CreateInternalEmployeeViewModel.Phone,
-                        Email = model.Email,
-                        Address = model.CreateInternalEmployeeViewModel.Address,
-                        Type = "No type",
-                        HireDate = null
-                    };
-                    db.Employees.Add(internalEmployee);
+                        Employee internalEmployee = new InternalEmployee
+                        {
+                            EmployeeId = 0,
+                            FirstMidName = model.CreateEmployeeViewModel.FirstMidName,
+                            LastName = model.CreateEmployeeViewModel.LastName,
+                            Phone = model.CreateEmployeeViewModel.Phone,
+                            Email = model.Email,
+                            Address = model.CreateEmployeeViewModel.Address,
+                            Type = "No type",
+                            HireDate = null
+                        };
+                        db.Employees.Add(internalEmployee);
+                    }
+                    else if (model.CreateEmployeeViewModel.EmployeeType.Equals(EmployeeType.ExternalEmployee))
+                    {
+                        Employee externalEmployee = new ExternalEmployee
+                        {
+                            EmployeeId = 0,
+                            FirstMidName = model.CreateEmployeeViewModel.FirstMidName,
+                            LastName = model.CreateEmployeeViewModel.LastName,
+                            Phone = model.CreateEmployeeViewModel.Phone,
+                            Email = model.Email,
+                            Address = model.CreateEmployeeViewModel.Address,
+                            Type = "No type",
+                            SubcontractorId = null
+                        };
+                        db.Employees.Add(externalEmployee);
+                    }
+                    
                     db.SaveChanges();
 
                     return RedirectToAction("Index", "Home");
@@ -186,6 +206,7 @@ namespace CompanyNotes.Controllers
             }
 
             // If we got this far, something failed, redisplay form
+            ViewBag.EmployeeTypeErrorMessage = "Please Select An Employee Type!";
             return View(model);
         }
 
