@@ -51,11 +51,11 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Type)
+            @Html.DisplayNameFor(model => model.WorkTitle.Name)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Type)
+            @Html.DisplayFor(model => model.WorkTitle.Name)
         </dd>
 
         <dt>
@@ -64,6 +64,13 @@
 
         <dd>
             @Html.DisplayFor(model => model.Subcontractor.Name)
+        </dd>
+
+        <dt>
+            @Html.Label("Roles")
+        </dt>
+        <dd>
+
         </dd>
 
     </dl>

@@ -4,11 +4,9 @@
     ViewBag.Title = "Index";
 }
 
+
 <h2>All External Employees</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
 <table class="table">
     <tr>
         <th>
@@ -24,10 +22,10 @@
             @Html.DisplayNameFor(model => model.WorkTitle)
         </th>
         <th>
-            @Html.Label("Roles")
+            @Html.DisplayNameFor(model => model.Subcontractor.Name)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Subcontractor.Name)
+            @Html.Label("Roles")
         </th>
         <th></th>
     </tr>
@@ -47,10 +45,10 @@
             @Html.DisplayFor(modelItem => item.WorkTitle.Name)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.WorkTitle.Name)
+            @Html.DisplayFor(modelItem => item.Subcontractor.Name)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Subcontractor.Name)
+            @Html.DisplayFor(modelItem => item.WorkTitle.Name)
         </td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.EmployeeId }) |

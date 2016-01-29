@@ -50,7 +50,8 @@ namespace CompanyNotes.Controllers
             {
                 return HttpNotFound();
             }
-            
+
+            ViewBag.WorkTitleId = new SelectList(db.WorkTitles, "WorkTitleId", "Name", internalEmployee.WorkTitleId);
             return View(internalEmployee);
         }
 
@@ -59,7 +60,7 @@ namespace CompanyNotes.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "EmployeeId,FirstMidName,LastName,Phone,Email,Address,Type,Role,HireDate")] InternalEmployee internalEmployee)
+        public ActionResult Edit([Bind(Include = "EmployeeId,FirstMidName,LastName,Phone,Email,Address,WorkTitleId,HireDate")] InternalEmployee internalEmployee)
         {
             if (ModelState.IsValid)
             {
