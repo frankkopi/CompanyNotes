@@ -178,7 +178,7 @@ namespace CompanyNotes.Controllers
                             Email = model.Email,
                             Address = model.CreateEmployeeViewModel.Address,
                             WorkTitleId = null,
-                            HireDate = null
+                            HireDate = null,
                         };
                         db.Employees.Add(internalEmployee);
                     }

@@ -139,7 +139,6 @@ namespace CompanyNotes.Controllers
                 //ViewBag.RolesForThisUser = account.UserManager.GetRoles(user.Id);
                 ViewBag.RolesForThisUser = UserManager.GetRoles(user.Id);
 
-
                 // prepopulat roles for the view dropdown
                 var list = context.Roles.OrderBy(r => r.Name).ToList().Select(rr => new SelectListItem { Value = rr.Name.ToString(), Text = rr.Name }).ToList();
                 ViewBag.Roles = list;

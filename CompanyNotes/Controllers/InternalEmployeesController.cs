@@ -51,7 +51,12 @@ namespace CompanyNotes.Controllers
                 return HttpNotFound();
             }
 
+            // prepopulate roles for the view dropdown
+            var list = db.Roles.OrderBy(r => r.Name).ToList().Select(rr => new SelectListItem { Value = rr.Name.ToString(), Text = rr.Name }).ToList();
+            ViewBag.Roles = list;
+
             ViewBag.WorkTitleId = new SelectList(db.WorkTitles, "WorkTitleId", "Name", internalEmployee.WorkTitleId);
+
             return View(internalEmployee);
         }
 
