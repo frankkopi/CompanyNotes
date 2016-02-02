@@ -374,6 +374,7 @@
     <Content Include="Views\WorkTitles\Details.cshtml" />
     <Content Include="Views\WorkTitles\Edit.cshtml" />
     <Content Include="Views\WorkTitles\Index.cshtml" />
+    <Content Include="Views\Residents\NoResidentsFound.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="obj\Debug\TempPE\" />

@@ -66,8 +66,10 @@
             @Html.DisplayFor(modelItem => item.Client.ClientName)
         </td>
         <td>
-            @Html.ActionLink("List of Residents", "ResidentsForCase", "Residents", new { caseId = item.CaseId }, null)
+            @Html.ActionLink("List of Residents", "ResidentsForCase", "Residents",
+                                                    new { caseId = item.CaseId, caseNumber = item.CaseNumber }, null)
         </td>
+
         <td>
             @Html.ActionLink("Edit", "Edit", new { id = item.CaseId }) |
             @Html.ActionLink("Details", "Details", new { id = item.CaseId }) |

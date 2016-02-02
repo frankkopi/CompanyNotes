@@ -22,9 +22,15 @@ namespace CompanyNotes.Controllers
         //}
 
         // GET: Residents
-        public ActionResult ResidentsForCase(int caseId)
+        public ActionResult ResidentsForCase(int caseId, int caseNumber)
         {
             var residentsForCurrentCase = db.Residents.Where(r => r.CaseId == caseId);
+
+            if (!residentsForCurrentCase.Any())
+            {
+                ViewBag.CaseNumber = caseNumber;
+                return View("NoResidentsFound");
+            }
 
             return View(residentsForCurrentCase);
         }
