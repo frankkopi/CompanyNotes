@@ -103,8 +103,11 @@ namespace CompanyNotes.Controllers
 
         public ActionResult ManageUserRoles()
         {
-            var list = context.Roles.OrderBy(r => r.Name).ToList().Select(rr => new SelectListItem { Value = rr.Name.ToString(), Text = rr.Name }).ToList();
-            ViewBag.Roles = list;
+            var listOfRoles = context.Roles.OrderBy(r => r.Name).ToList().Select(rr => new SelectListItem { Value = rr.Name.ToString(), Text = rr.Name }).ToList();
+            var listOfUsers = context.Users.ToList().Select(u => new SelectListItem { Value = u.UserName, Text = u.Employee.FullName }).ToList();
+
+            ViewBag.Roles = listOfRoles;
+            ViewBag.Users = listOfUsers;
             return View();
         }
 
@@ -114,15 +117,16 @@ namespace CompanyNotes.Controllers
         public ActionResult RoleAddToUser(string UserName, string RoleName)
         {
             ApplicationUser user = context.Users.Where(u => u.UserName.Equals(UserName, StringComparison.CurrentCultureIgnoreCase)).FirstOrDefault();
-            //var account = new AccountController();
-            //account.UserManager.AddToRole(user.Id, RoleName);
             UserManager.AddToRole(user.Id, RoleName);
 
             ViewBag.ResultMessage = "Role created successfully !";
 
-            // prepopulat roles for the view dropdown
-            var list = context.Roles.OrderBy(r => r.Name).ToList().Select(rr => new SelectListItem { Value = rr.Name.ToString(), Text = rr.Name }).ToList();
-            ViewBag.Roles = list;
+            // prepopulate roles and users for the view dropdown
+            var listOfRoles = context.Roles.OrderBy(r => r.Name).ToList().Select(rr => new SelectListItem { Value = rr.Name.ToString(), Text = rr.Name }).ToList();
+            var listOfUsers = context.Users.ToList().Select(u => new SelectListItem { Value = u.UserName, Text = u.Employee.FullName }).ToList();
+
+            ViewBag.Roles = listOfRoles;
+            ViewBag.Users = listOfUsers;
 
             return View("ManageUserRoles");
         }
@@ -139,7 +143,7 @@ namespace CompanyNotes.Controllers
                 //ViewBag.RolesForThisUser = account.UserManager.GetRoles(user.Id);
                 ViewBag.RolesForThisUser = UserManager.GetRoles(user.Id);
 
-                // prepopulat roles for the view dropdown
+                // prepopulate roles for the view dropdown
                 var list = context.Roles.OrderBy(r => r.Name).ToList().Select(rr => new SelectListItem { Value = rr.Name.ToString(), Text = rr.Name }).ToList();
                 ViewBag.Roles = list;
             }

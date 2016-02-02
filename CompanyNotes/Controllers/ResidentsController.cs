@@ -14,32 +14,26 @@ namespace CompanyNotes.Controllers
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
+        //// GET: Residents
+        //public ActionResult Index()
+        //{
+        //    var residents = db.Residents.Include(r => r.Case);
+        //    return View(residents.ToList());
+        //}
+
         // GET: Residents
-        public ActionResult Index()
+        public ActionResult ResidentsForCase(int caseId)
         {
-            var residents = db.Residents.Include(r => r.Case);
-            return View(residents.ToList());
+            var residentsForCurrentCase = db.Residents.Where(r => r.CaseId == caseId);
+
+            return View(residentsForCurrentCase);
         }
 
-        // GET: Residents/Details/5
-        public ActionResult Details(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Resident resident = db.Residents.Find(id);
-            if (resident == null)
-            {
-                return HttpNotFound();
-            }
-            return View(resident);
-        }
 
         // GET: Residents/Create
         public ActionResult Create()
         {
-            ViewBag.CaseId = new SelectList(db.Cases, "CaseId", "Address");
+            ViewBag.CaseId = new SelectList(db.Cases, "CaseId", "CaseNumber");
             return View();
         }
 
@@ -54,11 +48,12 @@ namespace CompanyNotes.Controllers
             {
                 db.Residents.Add(resident);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("ResidentsForCase", new { caseId = resident.CaseId });
             }
 
-            ViewBag.CaseId = new SelectList(db.Cases, "CaseId", "Address", resident.CaseId);
-            return View(resident);
+            //ViewBag.CaseId = new SelectList(db.Cases, "CaseId", "Address", resident.CaseId);
+            //return View(resident);
+            return RedirectToAction("ResidentsForCase", new { caseId = resident.CaseId });
         }
 
         // GET: Residents/Edit/5
@@ -73,7 +68,7 @@ namespace CompanyNotes.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.CaseId = new SelectList(db.Cases, "CaseId", "Address", resident.CaseId);
+            ViewBag.CaseId = new SelectList(db.Cases, "CaseId", "CaseNumber", resident.CaseId);
             return View(resident);
         }
 
@@ -88,10 +83,11 @@ namespace CompanyNotes.Controllers
             {
                 db.Entry(resident).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("ResidentsForCase", new { caseId = resident.CaseId });
             }
-            ViewBag.CaseId = new SelectList(db.Cases, "CaseId", "Address", resident.CaseId);
-            return View(resident);
+            //ViewBag.CaseId = new SelectList(db.Cases, "CaseId", "Address", resident.CaseId);
+            //return View(resident);
+            return RedirectToAction("ResidentsForCase", new { caseId = resident.CaseId });
         }
 
         // GET: Residents/Delete/5
@@ -117,7 +113,7 @@ namespace CompanyNotes.Controllers
             Resident resident = db.Residents.Find(id);
             db.Residents.Remove(resident);
             db.SaveChanges();
-            return RedirectToAction("Index");
+            return RedirectToAction("ResidentsForCase", new { caseId = resident.CaseId});
         }
 
         protected override void Dispose(bool disposing)

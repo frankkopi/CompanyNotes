@@ -13,6 +13,12 @@ namespace CompanyNotes
         {
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
+            //// Route mapping for the sending an caseId to the Index action in Residents controller
+            //routes.MapRoute(
+            //    "Residents",
+            //    "Residents/{caseId}"
+            //    );
+
             routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",

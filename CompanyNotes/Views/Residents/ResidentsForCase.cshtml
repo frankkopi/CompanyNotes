@@ -4,7 +4,7 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
+<h2>Index Residents for Case No. @Model.First().Case.CaseNumber</h2>
 
 <p>
     @Html.ActionLink("Create New", "Create")
@@ -12,16 +12,10 @@
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.Case.Address)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.FirstName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.LastName)
-        </th>
-        <th>
             @Html.DisplayNameFor(model => model.Address)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FullName)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.Email)
@@ -35,16 +29,10 @@
 @foreach (var item in Model) {
     <tr>
         <td>
-            @Html.DisplayFor(modelItem => item.Case.Address)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.FirstName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.LastName)
-        </td>
-        <td>
             @Html.DisplayFor(modelItem => item.Address)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FullName)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.Email)
@@ -54,10 +42,11 @@
         </td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.ResidentId }) |
-            @Html.ActionLink("Details", "Details", new { id=item.ResidentId }) |
             @Html.ActionLink("Delete", "Delete", new { id=item.ResidentId })
         </td>
     </tr>
 }
 
 </table>
+
+@Html.ActionLink("Back to List", "Index", "Cases")

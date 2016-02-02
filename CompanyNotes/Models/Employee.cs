@@ -50,7 +50,7 @@ namespace CompanyNotes.Models
         public int? WorkTitleId { get; set; } // FK
 
         public virtual WorkTitle WorkTitle { get; set; }
-        
+
         public virtual ICollection<Case> Cases { get; set; } // many-to-many
         public virtual ICollection<WorkNote> WorkNotes { get; set; } // one-to-many
     }

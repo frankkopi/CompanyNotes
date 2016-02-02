@@ -11,21 +11,27 @@ namespace CompanyNotes.Models
         public int CaseId { get; set; }
 
         [Required]
+        [Display(Name = "Case Number")]
+        public int CaseNumber { get; set; }
+
+        [Required]
         public string Address { get; set; }
 
         [Required]
         [DataType(DataType.Date)]
-        [DisplayFormat(DataFormatString = "{0:dd-MM-yyyy}", ApplyFormatInEditMode = true)]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         [Display(Name = "Start Date")]
         public DateTime StartDate { get; set; }
 
         [DataType(DataType.Date)]
-        [DisplayFormat(DataFormatString = "{0:dd-MM-yyyy}", ApplyFormatInEditMode = true)]
-        [Display(Name = "End Date")]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
+        [Display(Name = "Expected End Date")]
         public DateTime EndDate { get; set; }
 
+        [Display(Name = "Case Status")]
         public bool IsActive { get; set; }
 
+        [Display(Name = "Site Manager")]
         public string Manager { get; set; }
 
         public int ClientId { get; set; }  // FK
@@ -35,5 +41,20 @@ namespace CompanyNotes.Models
         public virtual ICollection<WorkNote> WorkNotes { get; set; } // one-to-many
         public virtual ICollection<Resident> Residents { get; set; } // one-to-many
         public virtual ICollection<Subcontractor> Subcontractors { get; set; } // many-to-many
+
+        public int setCaseNumber(int numberFromDb)
+        {
+            int currentNumber = -1;
+
+            if (numberFromDb == 0)
+            {
+                currentNumber = 100100;
+            }
+            else
+            {
+                currentNumber = numberFromDb + 100;
+            }
+            return currentNumber;
+        }
     }
 }

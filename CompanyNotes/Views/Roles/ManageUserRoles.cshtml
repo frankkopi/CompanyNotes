@@ -15,7 +15,8 @@
     @Html.ValidationSummary(true)
 
     <p>
-        Username : @Html.TextBox("UserName")
+        @*Username : @Html.TextBox("UserName")*@
+        Username : @Html.DropDownList("UserName", (IEnumerable<SelectListItem>)ViewBag.Users, "Select...")
         Role Name: @Html.DropDownList("RoleName", (IEnumerable<SelectListItem>)ViewBag.Roles, "Select ...")
 
     </p>

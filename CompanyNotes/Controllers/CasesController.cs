@@ -42,6 +42,10 @@ namespace CompanyNotes.Controllers
         public ActionResult Create()
         {
             ViewBag.ClientId = new SelectList(db.Clients, "ClientId", "ClientName");
+            
+            var managers = db.Employees.Where(e => e.WorkTitle.Name == "Site Manager");
+            ViewBag.Managers = new SelectList(managers, "FullName", "FullName");
+
             return View();
         }
 
@@ -54,12 +58,16 @@ namespace CompanyNotes.Controllers
         {
             if (ModelState.IsValid)
             {
+                int lastCaseNumberInDb = db.Cases.OrderByDescending(c => c.CaseNumber).Select(cn => cn.CaseNumber).FirstOrDefault();
+
+                @case.CaseNumber = @case.setCaseNumber(lastCaseNumberInDb);
                 db.Cases.Add(@case);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
             ViewBag.ClientId = new SelectList(db.Clients, "ClientId", "ClientName", @case.ClientId);
+            
             return View(@case);
         }
 
@@ -76,6 +84,10 @@ namespace CompanyNotes.Controllers
                 return HttpNotFound();
             }
             ViewBag.ClientId = new SelectList(db.Clients, "ClientId", "ClientName", @case.ClientId);
+
+            var managers = db.Employees.Where(e => e.WorkTitle.Name == "Site Manager");
+            ViewBag.Managers = new SelectList(managers, "FullName", "FullName");
+
             return View(@case);
         }
 
@@ -84,7 +96,7 @@ namespace CompanyNotes.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "CaseId,Address,StartDate,EndDate,IsActive,Manager,ClientId")] Case @case)
+        public ActionResult Edit([Bind(Include = "CaseId,CaseNumber,Address,StartDate,EndDate,IsActive,Manager,ClientId")] Case @case)
         {
             if (ModelState.IsValid)
             {
