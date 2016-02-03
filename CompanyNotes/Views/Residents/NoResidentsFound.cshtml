@@ -1,11 +1,15 @@
 ﻿
 @{
-    ViewBag.Title = "NoResidentsFound";
+    ViewBag.Title = "No Residents Found";
 }
 
-<h2>No Residents Found</h2>
+<h3>No Residents Found</h3>
 
-<p>
-    No Residents for Case @ViewBag.CaseNumber was found 
-</p>
+<hr />
+<h4>
+    Case No. @ViewBag.CaseNumber has no Residents assigned yet!
+</h4>
+
+@Html.ActionLink("Back to List", "Index", "Cases")
+
 

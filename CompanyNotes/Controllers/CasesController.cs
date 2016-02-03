@@ -17,7 +17,6 @@ namespace CompanyNotes.Controllers
         // GET: Cases
         public ActionResult Index()
         {
-            //var cases = db.Cases.Include(@ => @.Client);
             var cases = db.Cases.Include(x => x.Client);
 
             return View(cases.ToList());

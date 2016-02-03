@@ -4,7 +4,7 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
+<h3>Notes for @ViewBag.Employee.FullName</h3>
 
 <p>
     @Html.ActionLink("Create New", "Create")
@@ -15,16 +15,7 @@
             @Html.DisplayNameFor(model => model.Case.Address)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Employee.FirstMidName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Date)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Caption)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Text)
+            Notes
         </th>
         <th></th>
     </tr>
@@ -34,17 +25,10 @@
         <td>
             @Html.DisplayFor(modelItem => item.Case.Address)
         </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Employee.FirstMidName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Date)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Caption)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Text)
+        <td style="width: 60%;">
+            <b>@Html.DisplayFor(modelItem => item.Date)</b><br />
+            <b>@Html.DisplayFor(modelItem => item.Caption)</b><br />
+            <p>@Html.DisplayFor(modelItem => item.Text)</p>
         </td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.WorkNoteId }) |

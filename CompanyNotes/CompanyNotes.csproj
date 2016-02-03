@@ -339,7 +339,6 @@
     <Content Include="Views\Clients\Index.cshtml" />
     <Content Include="Views\Residents\Create.cshtml" />
     <Content Include="Views\Residents\Delete.cshtml" />
-    <Content Include="Views\Residents\Details.cshtml" />
     <Content Include="Views\Residents\Edit.cshtml" />
     <Content Include="Views\Residents\ResidentsForCase.cshtml" />
     <Content Include="Views\Subcontractors\Create.cshtml" />
@@ -375,6 +374,7 @@
     <Content Include="Views\WorkTitles\Edit.cshtml" />
     <Content Include="Views\WorkTitles\Index.cshtml" />
     <Content Include="Views\Residents\NoResidentsFound.cshtml" />
+    <Content Include="Views\WorkNotes\IndexForCase.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="obj\Debug\TempPE\" />

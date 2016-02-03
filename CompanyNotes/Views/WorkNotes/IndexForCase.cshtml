@@ -1,0 +1,41 @@
+﻿@model IEnumerable<CompanyNotes.Models.WorkNote>
+
+@{
+    ViewBag.Title = "IndexForCase";
+}
+
+<h3>Notes For Case No. @ViewBag.CaseNumber</h3>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Employee.FullName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Date)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Text)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach(var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Employee.FullName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Date)
+            </td>
+            <td style="width: 60%">
+                <b>@Html.DisplayFor(modelItem => item.Caption)</b><br />
+                @Html.DisplayFor(modelItem => item.Text)
+            </td>
+        </tr>
+    }
+
+</table>
+
+

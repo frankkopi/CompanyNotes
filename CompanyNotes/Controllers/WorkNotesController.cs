@@ -7,17 +7,40 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using CompanyNotes.Models;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace CompanyNotes.Controllers
 {
     public class WorkNotesController : Controller
     {
-        private ApplicationDbContext db = new ApplicationDbContext();
+        protected ApplicationDbContext db { get; set; }
+        protected UserManager<ApplicationUser> UserManager { get; set; }  // User manager - attached to application DB context
 
-        // GET: WorkNotes
+        public WorkNotesController()
+        {
+            this.db = new ApplicationDbContext();
+            this.UserManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(this.db));
+        }
+
+        // GET: WorkNotes for an employee
         public ActionResult Index()
         {
-            var workNotes = db.WorkNotes.Include(w => w.Case).Include(w => w.Employee);
+            var user = UserManager.FindById(User.Identity.GetUserId());
+            ViewBag.Employee = user.Employee;
+
+            //var workNotes = db.WorkNotes.Include(w => w.Case).Include(w => w.Employee);
+            var workNotes = db.WorkNotes.Include(w => w.Case).Include(w => w.Employee).Where(e => e.EmployeeId == user.Employee.EmployeeId);
+
+            return View(workNotes.ToList());
+        }
+
+        // GET: WorkNotes for a case
+        public ActionResult IndexForCase(int caseId)
+        {
+            var workNotes = db.WorkNotes.Where(w => w.CaseId == caseId).Include(w => w.Employee);
+            ViewBag.CaseNumber = db.Cases.Where(c => c.CaseId == caseId).Select(c => c.CaseNumber).FirstOrDefault();
+
             return View(workNotes.ToList());
         }
 
@@ -40,8 +63,21 @@ namespace CompanyNotes.Controllers
         public ActionResult Create()
         {
             ViewBag.CaseId = new SelectList(db.Cases, "CaseId", "Address");
-            ViewBag.EmployeeId = new SelectList(db.Employees, "EmployeeId", "FirstName");
-            return View();
+
+            var user = UserManager.FindById(User.Identity.GetUserId());
+
+            WorkNote note = new WorkNote
+            {
+                WorkNoteId = 0,
+                Date = DateTime.Now,
+                Caption = null,
+                Text = null,
+                CaseId = -1,
+                EmployeeId = user.Employee.EmployeeId,
+                Employee = user.Employee
+            };                
+            
+            return View(note);
         }
 
         // POST: WorkNotes/Create

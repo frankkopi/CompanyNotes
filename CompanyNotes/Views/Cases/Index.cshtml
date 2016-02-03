@@ -18,13 +18,10 @@
             @Html.DisplayNameFor(model => model.Address)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Manager)
-        </th>
-        <th>
             @Html.DisplayNameFor(model => model.IsActive)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Client.ClientName)
+            @Html.DisplayNameFor(model => model.WorkNotes)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.Residents)
@@ -40,9 +37,6 @@
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.Address)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Manager)
         </td>
 
             @if (item.IsActive)
@@ -63,7 +57,7 @@
             }
 
         <td>
-            @Html.DisplayFor(modelItem => item.Client.ClientName)
+            @Html.ActionLink("Show Notes", "IndexForCase", "WorkNotes", new { caseId = item.CaseId }, null)
         </td>
         <td>
             @Html.ActionLink("List of Residents", "ResidentsForCase", "Residents",
