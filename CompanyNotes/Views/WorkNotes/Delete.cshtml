@@ -20,11 +20,11 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Employee.FirstName)
+            @Html.DisplayNameFor(model => model.Employee.FullName)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Employee.FirstName)
+            @Html.DisplayFor(model => model.Employee.FullName)
         </dd>
 
         <dt>
@@ -48,17 +48,20 @@
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Text)
+            @*@Html.DisplayFor(model => model.Text)*@
+            @Html.TextAreaFor(model => model.Text, new { @class = "form-control", @id = "showTextArea", @readonly = "readonly" })
         </dd>
 
     </dl>
 
-    @using (Html.BeginForm()) {
+    @using (Html.BeginForm())
+    {
         @Html.AntiForgeryToken()
 
         <div class="form-actions no-color">
-            <input type="submit" value="Delete" class="btn btn-default" /> |
-            @Html.ActionLink("Back to List", "Index")
+            <input type="submit" value="Delete" class="btn btn-danger" /> |
+            @Html.ActionLink("Back to List", "NotesForCase", new { caseId = Model.CaseId })
         </div>
     }
+
 </div>

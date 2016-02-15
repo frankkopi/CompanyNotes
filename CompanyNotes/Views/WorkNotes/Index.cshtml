@@ -28,12 +28,8 @@
         <td style="width: 60%;">
             <b>@Html.DisplayFor(modelItem => item.Date)</b><br />
             <b>@Html.DisplayFor(modelItem => item.Caption)</b><br />
-            <p>@Html.DisplayFor(modelItem => item.Text)</p>
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.WorkNoteId }) |
-            @Html.ActionLink("Details", "Details", new { id=item.WorkNoteId }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.WorkNoteId })
+            @Html.TextAreaFor(modelItem => item.Text, new { @class = "form-control", @id = "showTextArea", @readonly = "readonly" })
+            
         </td>
     </tr>
 }

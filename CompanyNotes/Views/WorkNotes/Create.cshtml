@@ -27,7 +27,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.CaseId, "CaseId", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.DropDownList("CaseId", null, htmlAttributes: new { @class = "form-control", @id = "wideTextArea" })
+                @Html.DropDownList("CaseId", null, htmlAttributes: new { @class = "form-control", @id = "applyExtraWidth" })
                 @Html.ValidationMessageFor(model => model.CaseId, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -35,7 +35,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.Caption, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.Caption, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.TextBoxFor(model => model.Caption, null, new { @class = "form-control", @id = "applyExtraWidth" })
                 @Html.ValidationMessageFor(model => model.Caption, "", new { @class = "text-danger" })
             </div>
         </div>

@@ -1,7 +1,7 @@
 ﻿@model IEnumerable<CompanyNotes.Models.WorkNote>
 
 @{
-    ViewBag.Title = "IndexForCase";
+    ViewBag.Title = "Notes For Case";
 }
 
 <h3>Notes For Case No. @ViewBag.CaseNumber</h3>
@@ -27,15 +27,21 @@
                 @Html.DisplayFor(modelItem => item.Employee.FullName)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Date)
+                <b>@Html.DisplayFor(modelItem => item.Date)</b>
             </td>
             <td style="width: 60%">
                 <b>@Html.DisplayFor(modelItem => item.Caption)</b><br />
-                @Html.DisplayFor(modelItem => item.Text)
+                @Html.TextAreaFor(modelItem => item.Text, new { @class = "form-control", @id = "showTextArea", @readonly = "readonly" })
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.WorkNoteId }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.WorkNoteId })
             </td>
         </tr>
     }
 
 </table>
+
+@Html.ActionLink("Back to Cases", "Index", "Cases")
 
 

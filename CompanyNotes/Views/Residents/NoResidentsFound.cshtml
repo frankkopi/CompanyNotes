@@ -4,12 +4,19 @@
 }
 
 <h3>No Residents Found</h3>
+<div>
+    @Html.ActionLink("Create new Resident", "Create", new { caseId = ViewBag.CaseId, caseNumber = ViewBag.CaseNumber })
+</div>
 
 <hr />
 <h4>
     Case No. @ViewBag.CaseNumber has no Residents assigned yet!
 </h4>
 
-@Html.ActionLink("Back to List", "Index", "Cases")
+
+<div>
+    @Html.ActionLink("Back to List", "Index", "Cases")
+</div>
+
 
 

@@ -27,6 +27,11 @@ namespace CompanyNotes.Controllers
         public ActionResult Index()
         {
             var user = UserManager.FindById(User.Identity.GetUserId());
+            if (user == null)
+            {
+                return RedirectToAction("Login", "Account");
+            }
+
             ViewBag.Employee = user.Employee;
 
             //var workNotes = db.WorkNotes.Include(w => w.Case).Include(w => w.Employee);
@@ -36,7 +41,7 @@ namespace CompanyNotes.Controllers
         }
 
         // GET: WorkNotes for a case
-        public ActionResult IndexForCase(int caseId)
+        public ActionResult NotesForCase(int caseId)
         {
             var workNotes = db.WorkNotes.Where(w => w.CaseId == caseId).Include(w => w.Employee);
             ViewBag.CaseNumber = db.Cases.Where(c => c.CaseId == caseId).Select(c => c.CaseNumber).FirstOrDefault();
@@ -127,7 +132,7 @@ namespace CompanyNotes.Controllers
             {
                 db.Entry(workNote).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("NotesForCase", new { caseId = workNote.CaseId} );
             }
             ViewBag.CaseId = new SelectList(db.Cases, "CaseId", "Address", workNote.CaseId);
             ViewBag.EmployeeId = new SelectList(db.Employees, "EmployeeId", "FirstName", workNote.EmployeeId);
@@ -157,7 +162,7 @@ namespace CompanyNotes.Controllers
             WorkNote workNote = db.WorkNotes.Find(id);
             db.WorkNotes.Remove(workNote);
             db.SaveChanges();
-            return RedirectToAction("Index");
+            return RedirectToAction("NotesForCase", new { caseId = workNote.CaseId });
         }
 
         protected override void Dispose(bool disposing)

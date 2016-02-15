@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using CompanyNotes.Models;
+using CompanyNotes.ViewModels;
 
 namespace CompanyNotes.Controllers
 {
@@ -28,19 +29,27 @@ namespace CompanyNotes.Controllers
 
             if (!residentsForCurrentCase.Any())
             {
+                ViewBag.CaseId = caseId;
                 ViewBag.CaseNumber = caseNumber;
                 return View("NoResidentsFound");
             }
 
+            ViewBag.CaseId = caseId;
+            ViewBag.CaseNumber = caseNumber;
             return View(residentsForCurrentCase);
         }
 
 
         // GET: Residents/Create
-        public ActionResult Create()
+        public ActionResult Create(int caseId, int caseNumber)
         {
-            ViewBag.CaseId = new SelectList(db.Cases, "CaseId", "CaseNumber");
-            return View();
+            CreateResidentViewModel viewModel = new CreateResidentViewModel
+            {
+                CaseId = caseId,
+                CaseNumber = caseNumber
+            };
+
+            return View(viewModel);
         }
 
         // POST: Residents/Create
@@ -48,18 +57,26 @@ namespace CompanyNotes.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ResidentId,FirstName,LastName,Address,Email,Phone,CaseId")] Resident resident)
+        public ActionResult Create(CreateResidentViewModel model)
         {
             if (ModelState.IsValid)
             {
+                Resident resident = new Resident
+                {
+                    ResidentId = 0,
+                    FirstName = model.FirstName,
+                    LastName = model.LastName,
+                    Address = model.Address,
+                    Email = model.Email,
+                    Phone = model.Phone,
+                    CaseId = model.CaseId
+                };
                 db.Residents.Add(resident);
                 db.SaveChanges();
-                return RedirectToAction("ResidentsForCase", new { caseId = resident.CaseId });
+                return RedirectToAction("ResidentsForCase", new { caseId = model.CaseId, caseNumber = model.CaseNumber });
             }
 
-            //ViewBag.CaseId = new SelectList(db.Cases, "CaseId", "Address", resident.CaseId);
-            //return View(resident);
-            return RedirectToAction("ResidentsForCase", new { caseId = resident.CaseId });
+            return RedirectToAction("ResidentsForCase", new { caseId = model.CaseId, caseNumber = model.CaseNumber });
         }
 
         // GET: Residents/Edit/5
